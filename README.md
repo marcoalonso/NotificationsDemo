@@ -3,11 +3,13 @@ a simple app to schedule some task to do and a Notification will be appear on th
 
 Here is the preview
 
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374091-9200356d-86f5-471b-afd2-a159c3b5ad7f.png">
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374099-b853e059-3a07-4c19-8981-35d20c064adc.png">
 
-![Captura de Pantalla 2022-10-18 a la(s) 12 57 22](https://user-images.githubusercontent.com/49013250/196508197-2a38bc93-33e8-498b-b0ca-a201c2ad4b58.png)
-![Captura de Pantalla 2022-10-18 a la(s) 12 58 53](https://user-images.githubusercontent.com/49013250/196508790-800ca301-6364-4521-aa49-33bbc2afb51d.png)
-![Captura de Pantalla 2022-10-18 a la(s) 13 00 33](https://user-images.githubusercontent.com/49013250/196508802-5b9bde0a-4af0-4228-a82e-ae189eb472a3.png)
-![Captura de Pantalla 2022-10-18 a la(s) 12 58 04](https://user-images.githubusercontent.com/49013250/196508809-274bd45d-207f-4da8-89f2-9c77ee87f8ae.png)
-![Captura de Pantalla 2022-10-18 a la(s) 12 57 58](https://user-images.githubusercontent.com/49013250/196508817-e890166e-69c2-4b95-a5a1-be37e9907db2.png)
-![noti](https://user-images.githubusercontent.com/49013250/196508837-11a11cce-7de9-4e7f-8eb7-4727e5cd15c6.png)
-![Captura de Pantalla 2022-10-18 a la(s) 13 01 03](https://user-images.githubusercontent.com/49013250/196508891-28558044-7438-4dfd-9ce8-7b9addc69cd0.png)
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374106-f744c1e7-6f19-4557-b90e-4e5e0b012759.png">
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374123-ef5519ba-3492-47b0-ab08-913747b0cf58.png">
+ <img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374138-6d7b4f96-e79f-4daf-9276-5e0ca226c9d7.png">
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374143-63020612-f17f-4c28-bca8-af49b43bf68f.png">
+
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374148-d5e767d4-21fc-48b9-91c8-b4299ce64e25.png">
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49013250/197374171-1cb96101-4cb5-4545-ad84-246384e94ea7.png">

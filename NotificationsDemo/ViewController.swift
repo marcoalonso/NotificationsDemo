@@ -9,9 +9,9 @@ import UIKit
 import AVFoundation
 import UserNotifications
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var mensaje: UITextField!
+class ViewController: UIViewController, UITextViewDelegate {
+    
+    @IBOutlet weak var mensaje: UITextView!
     @IBOutlet weak var titulo: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -22,31 +22,56 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mensaje.delegate = self
+        
         notificationCenter.requestAuthorization(options: [.alert, .sound]) {
             (permissionGranted, error) in
-            if(!permissionGranted)
-            {
-                print("Permission Denied")
+            if(!permissionGranted) {
+                DispatchQueue.main.async {
+                    let ac = UIAlertController(title: "Habilitar las Notificaciones?", message: "Para poder utilizar esta característica, debes de permitir las notificaciones.", preferredStyle: .alert)
+                    let goToSettings = UIAlertAction(title: "Ir a configuración.", style: .default)
+                    { (_) in
+                        guard let setttingsURL = URL(string: UIApplication.openSettingsURLString)
+                        else
+                        {
+                            return
+                        }
+                        
+                        if(UIApplication.shared.canOpenURL(setttingsURL)) {
+                            UIApplication.shared.open(setttingsURL) { (_) in
+                                
+                            }
+                        }
+                    }
+                    ac.addAction(goToSettings)
+                    ac.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (_) in}))
+                    self.present(ac, animated: true)
+                }
             }
         }
+        
+        
     }
-
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        mensaje.text = ""
+    }
     
     
-   
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     
     @IBAction func programarNotificationButton(_ sender: UIButton) {
         notificationCenter.getNotificationSettings { (settings) in
             
-            DispatchQueue.main.async
-            {
+            DispatchQueue.main.async {
                 let title = self.titulo.text!
                 let message = self.mensaje.text!
                 let date = self.datePicker.date
                 
-                if(settings.authorizationStatus == .authorized)
-                {
+                if(settings.authorizationStatus == .authorized) {
                     let content = UNMutableNotificationContent()
                     content.title = title
                     content.body = message
@@ -58,14 +83,15 @@ class ViewController: UIViewController {
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     
                     self.notificationCenter.add(request) { (error) in
-                        if(error != nil)
-                        {
+                        if(error != nil) {
                             print("Error " + error.debugDescription)
                             return
                         }
                     }
-                    let ac = UIAlertController(title: "Notification Scheduled", message: "At " + self.formattedDate(date: date), preferredStyle: .alert)
+                    let ac = UIAlertController(title: "Notificacion Programada", message: "Para el " + self.formattedDate(date: date), preferredStyle: .alert)
+                    
                     print("date: ", self.formattedDate(date: date))
+                    
                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
                         print("DEBUG: OK")
                         self.mensaje.text = ""
@@ -73,11 +99,9 @@ class ViewController: UIViewController {
                         self.datePicker.date = Date()
                     }))
                     self.present(ac, animated: true)
-                }
-                else
-                {
-                    let ac = UIAlertController(title: "Enable Notifications?", message: "To use this feature you must enable notifications in settings", preferredStyle: .alert)
-                    let goToSettings = UIAlertAction(title: "Settings", style: .default)
+                } else {
+                    let ac = UIAlertController(title: "Habilitar las Notificaciones?", message: "Para poder utilizar esta característica, debes de permitir las notificaciones.", preferredStyle: .alert)
+                    let goToSettings = UIAlertAction(title: "Ir a configuración.", style: .default)
                     { (_) in
                         guard let setttingsURL = URL(string: UIApplication.openSettingsURLString)
                         else
@@ -85,9 +109,10 @@ class ViewController: UIViewController {
                             return
                         }
                         
-                        if(UIApplication.shared.canOpenURL(setttingsURL))
-                        {
-                            UIApplication.shared.open(setttingsURL) { (_) in}
+                        if(UIApplication.shared.canOpenURL(setttingsURL)) {
+                            UIApplication.shared.open(setttingsURL) { (_) in
+                                
+                            }
                         }
                     }
                     ac.addAction(goToSettings)
@@ -98,8 +123,9 @@ class ViewController: UIViewController {
         }
     }
     
-    func formattedDate(date: Date) -> String
-    {
+    
+    
+    func formattedDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM y HH:mm"
         return formatter.string(from: date)
